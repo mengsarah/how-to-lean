@@ -18,7 +18,7 @@ _f(1) = 1 + 1 = 2_
 
 	#eval f(1) -- result: 2
 
-You can use parentheses if it makes things clearer, but a lot of Lean function calls that you will see in this class will look more like this:
+You can use parentheses if it makes things clearer, but a lot of Lean function calls that you will see in this class will look more like this (without the #eval):
 
 	#eval f 1
 
@@ -97,15 +97,37 @@ but since we're in Lean, the way you call it is `Likes person1 person2`
 
 (This particular example needs to be polished; e.g. `Likes person1 person2` is actually a Prop object/returns a Prop object; also, I'm still not as familiar with functional programming and am definitely approaching Lean from an OOP mindset)
 
+### Tactics ###
+
+the |- symbol thing for goals
+
+work on one goal at a time
+
+order matters (link to last section)
+
+
+### Reading Lean description and error messages ###
+
+
+### Associativity ###
+
+for the stuff we use in the course, generally right associative
+
+
 ## Small things ##
+
+### Argument order ###
+
+it matters
+
 
 ### Whitespacing ###
 
-A whitespace is a character that is visually blank, hence the name. These include not only spaces and tabs, but also newlines, also known as line breaks. (Think of the what you see when you show [nonprinting characters](https://en.wikipedia.org/wiki/Non-printing_character_in_word_processors) in a word processor.)
+A whitespace is a character that is visually blank, hence the name. These include not only spaces and tabs, but also newlines, also known as line breaks. Think of the what you see when you show [nonprinting characters](https://en.wikipedia.org/wiki/Non-printing_character_in_word_processors) in a word processor.
 
 One whitespace is required between every term. More than one whitespace is not required. Lean does not treat terms differently if they have different whitespacing.
 
-The following three definitions function exactly the same:
+The following three definitions are completely identical in all ways except for how they appear to humans:
 
 	def construct_a_proof (P Q : Prop) (p : P) (q : Q) : P ∧ Q := and.intro p q
 
@@ -132,7 +154,17 @@ Lean really does not care what whitespacing you use, as long as you use at least
 
 text
 
+whitespace, doesn't matter what kind (see above)
+
+keywords
+
+lean might be expecting another argument to a function--remember, the type of whitespacing doesn't matter to Lean
+
+so some keywords might be unexpected and make Lean go WHAT ARE YOU DOING THIS ISN'T AN ARGUMENT
+
 if in doubt just put #check 0 after a red squiggly to see if your later problems are fixed
+
+if in tactic state, commas instead of whitespacing
 
 
 ### Comments ###
@@ -148,10 +180,10 @@ The following code block demonstrates how you can comment:
 	/- or it can span just one line -/
 	
 	/--/
-	CAUTION: This text is a comment! You need a non-hyphen character before the closing -/
+	CAUTION: This text is a comment! You need something other than "/-" immediately before the closing -/
 
 	def construct_a_proof'''
-	(P Q : Prop) /- you can even do this (but please don't; it makes code harder to read) -/ (p : P) (q : Q)
+	(P Q : Prop) /- you can even comment between terms (but please don't do this in any language; it makes code harder to read) -/ (p : P) (q : Q)
 	: P ∧ /- this is also syntactically correct but absolutely terrible practice -/ Q
 	:= and.intro p q -- this kind of comment lasts to the end of the line
 
