@@ -1,4 +1,6 @@
-Still a work in progress.
+Under construction.
+
+Intended for anyone learning Lean with little to no programming background, such as some students taking CS 2102 Discrete Mathematics at UVA.
 
 # How to read and write in Lean #
 
@@ -18,6 +20,8 @@ Still a work in progress.
 
 ## Understanding Lean ##
 
+The information in this file is meant to be a quick overview. For further reading, see [the Lean 3.4 documentation](https://leanprover.github.io/theorem_proving_in_lean/).
+
 ### Functions ###
 
 You know functions in a different context: continuous mathematics.
@@ -26,7 +30,7 @@ _f(x) = x + 1_
 
 That should look familiar. Here's the Lean equivalent (except only over the natural numbers):
 
-```
+```lean
 def f (x : nat) := x + 1
 ```
 
@@ -34,13 +38,13 @@ If your input is _x = 1_, what's your output?
 
 _f(1) = 1 + 1 = 2_
 
-```
+```lean
 #eval f(1) -- result: 2
 ```
 
 You can use parentheses if it makes things clearer, but a lot of Lean function calls that you will see in this class will look more like this (without the #eval):
 
-```
+```lean
 #eval f 1
 ```
 
@@ -55,7 +59,7 @@ Here's a more complicated example with function composition. You will likely be 
 
 Let _g(x) = x + 1_ and _h(x) = 2 * x_.
 
-```
+```lean
 def g (x : nat) := x + 1
 def h (x : nat) := 2 * x
 ```
@@ -64,7 +68,7 @@ What if you want to evaluate _h(g(x))_? If _x = 6_, what is the output of _h(g(x
 
 _g(6) = 6 + 1 = 7_, so _h(g(6)) = h(7) = 2 * 7 = 14_. (Alternative method: _h(g(6)) = 2 * g(6) = 2 * (6 + 1) = 2 * 7 = 14_)
 
-```
+```lean
 #eval h (g 6) -- result: 14
 ```
 
@@ -84,7 +88,7 @@ Here is an example of a function that takes in more than one argument. You will 
 
 _z = x + y_ (this could also be written as _z(x,y) = x + y_)
 
-```
+```lean
 def z (x : nat) (y : nat) := x + y
 ```
 
@@ -92,7 +96,7 @@ If your inputs are _x = 3_ and _y = 7_:
 
 _z = 3 + 7 = 10_
 
-```
+```lean
 #eval z 3 7 -- result: 10
 ```
 
@@ -107,14 +111,14 @@ old draft/scratch explanation based on exam 2:
 
 Let's say you see this:
 
-```
+```lean
 axiom Person : Type
 axiom Likes : Person → Person → Prop
 ```
 
 Think of Likes as a function that takes two arguments/parameters and returns a Prop. In a different programming language, you might have something like:
 
-```
+```java
 Prop Likes(Person p1, Person p2)
 {
 return p1.toString() + " likes " + p2.toString();
@@ -123,7 +127,7 @@ return p1.toString() + " likes " + p2.toString();
 
 or maybe you have this:
 
-```
+```python
 def Likes(p1, p2):
 return (string)p1 + " likes " + (string)p2
 ```
@@ -169,11 +173,11 @@ One whitespace is required between every term. More than one whitespace is not r
 
 The following three definitions are completely identical in all ways except for how they appear to humans:
 
-```
+```lean
 def construct_a_proof (P Q : Prop) (p : P) (q : Q) : P ∧ Q := and.intro p q
 ```
 
-```coq
+```lean
 def construct_a_proof'
 (P Q : Prop)
 (p : P)
@@ -196,7 +200,7 @@ def construct_a_proof''
 
 Note that the following not-very-human-readable code is valid in Lean and behaves as you would expect if the two definitions were separated by a line break:
 
-```
+```lean
 def zero_eq_zero: 0 = 0 := rfl def one_eq_one: 1 = 1 := rfl
 ```
 
@@ -226,7 +230,7 @@ You can comment with `--` or `/- -/`, analogous to the `//` and `/* */` that you
 
 The following code block demonstrates how you can comment (paste into a .lean file so you can see syntax highlighting):
 
-```
+```lean
 -- one way to comment
 
 /- another way to comment
