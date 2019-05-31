@@ -1,5 +1,19 @@
 # How to read and write in Lean #
 
+Table of Contents:
+
+[Understanding Lean](#understanding-lean)
+* Functions
+* Tactics
+* Reading Lean description and error messages
+* Associativity
+
+Small things
+* Argument order
+* Whitespacing
+* End of definitions, lines, etc.
+* Comments
+
 ## Understanding Lean ##
 
 ### Functions ###
@@ -123,7 +137,7 @@ it matters
 
 ### Whitespacing ###
 
-A whitespace is a character that is visually blank, hence the name. These include not only spaces and tabs, but also newlines, also known as line breaks. Think of the what you see when you show [nonprinting characters](https://en.wikipedia.org/wiki/Non-printing_character_in_word_processors) in a word processor.
+A whitespace is a character that is visually blank, hence the name. These include not only spaces and tabs, but also newlines, also known as line breaks. Think of what you see when you show [nonprinting characters](https://en.wikipedia.org/wiki/Non-printing_character_in_word_processors) in a word processor.
 
 One whitespace is required between every term. More than one whitespace is not required. Lean does not treat terms differently if they have different whitespacing.
 
@@ -171,7 +185,7 @@ if in tactic state, commas instead of whitespacing
 
 You can comment with `--` or `/- -/`, analogous to the `//` and `/* */` that you may be familiar with. Skip this section if you're familiar with comment syntax.
 
-The following code block demonstrates how you can comment:
+The following code block demonstrates how you can comment (paste into a .lean file so you can see syntax highlighting):
 
 	-- one way to comment
 
