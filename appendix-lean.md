@@ -1,4 +1,4 @@
-Under construction.
+Under construction. Please feel free to contribute!
 
 Intended for anyone learning Lean with little to no programming background, such as some students taking CS 2102 Discrete Mathematics at UVA.
 
@@ -9,7 +9,8 @@ Intended for anyone learning Lean with little to no programming background, such
 [Understanding Lean](#understanding-lean)
 * [Functions](#functions)
 * [Tactics](#tactics)
-* [Reading Lean description and error messages](#reading-lean-description-and-error-messages)
+* [Reading Lean descriptions](#reading-lean-descriptions)
+* [Reading Lean error messages](#reading-lean-and-error-messages)
 * [Associativity](#associativity)
 
 [Small things](#small-things)
@@ -20,7 +21,7 @@ Intended for anyone learning Lean with little to no programming background, such
 
 ## Understanding Lean ##
 
-The information in this file is meant to be a quick overview. For further reading, see [the Lean 3.4 documentation](https://leanprover.github.io/theorem_proving_in_lean/).
+The information here is meant to be a quick overview. For further reading, see [the Lean 3.4 documentation](https://leanprover.github.io/theorem_proving_in_lean/).
 
 ### Functions ###
 
@@ -42,7 +43,7 @@ _f(1) = 1 + 1 = 2_
 #eval f(1) -- result: 2
 ```
 
-You can use parentheses if it makes things clearer, but a lot of Lean function calls that you will see in this class will look more like this (without the #eval):
+You can use parentheses for one argument if it makes things clearer, and you will want to use parentheses for complex function calls, but a lot of the more simple Lean function calls that you will see in this class look more like this (without the #eval):
 
 ```lean
 #eval f 1
@@ -82,7 +83,7 @@ Here is what is happening:
 	3. Lean evaluates `g` with an argument of `6` (result: 7)
 4. Lean evaluates `h` with an argument of `(g 6)` a.k.a. 7 (result: 14)
 
-The parentheses are important! Lean will interpret `h g 6` (no parentheses) as calling the function `h` with two arguments: the function `g`, and the number 6. That's different from how it evaluates `h (g 6)` as calling the function `h` with just the one argument of the result of `g 6`.
+The parentheses are important! Lean will interpret `h g 6` (no parentheses) as calling the function `h` with two arguments: the function `g`, and the number 6. That's different from how it evaluates `h (g 6)` as calling the function `h` with just the one argument of the result of `g 6`. (You would get an error in this case, because `h` was only defined to take in one argument.)
 
 Here is an example of a function that takes in more than one argument. You will be dealing with a lot of these!
 
@@ -129,7 +130,7 @@ or maybe you have this:
 
 ```python
 def Likes(p1, p2):
-return (string)p1 + " likes " + (string)p2
+	return (string)p1 + " likes " + (string)p2
 ```
 
 and when you call it in those programming languages, you might type `Likes(person1, person2);` or `Likes(person1, person2)`
@@ -147,14 +148,27 @@ work on one goal at a time
 order matters (link to last section)
 
 
-### Reading Lean description and error messages ###
+### Reading Lean descriptions ###
 
 
+### Reading Lean error messages ###
+
+`type mismatch` - usually an issue with your arguments, either in your method definition or in your later usage; the message should tell you what Lean is expecting ("term x has type Y but is expected to have type Z"); check that you have the right number of explicit arguments, that they are of the right type(s), and that they are in the right order (match your later usage with your method definition; you will encounter some version of this in all programming languages)
+
+other kinds of `mismatch` - similar to above, double check your method definitions and that your later usage matches your method definitions
+
+`unknown identifier` - you did not define a term before using it--i.e. you did not tell Lean what type a term is; you can define terms within method definitions, just make sure that they are in the form (x : X) because Lean needs to know that x is of type X
+
+`declaration uses sorry` - your definition is incomplete
+
+`type expected`, `function expected` - exactly what they sound like, but this could be as simple of a fix as making sure you have all of the various punctuation syntax included; you may need to also refer to the comments under `type mismatch` above
 
 
 ### Associativity ###
 
 for the stuff we use in the course, generally right associative
+
+so P -> Q -> R is the same as P -> (Q -> R) (they both take two consecutive arguments) but is NOT the same as (P -> Q) -> R (this takes only one argument, which itself took an argument)
 
 
 ## Small things ##
@@ -162,7 +176,7 @@ for the stuff we use in the course, generally right associative
 
 ### Argument order ###
 
-it matters
+it matters; you will encounter some version of this in all programming languages
 
 
 ### Whitespacing ###
@@ -209,15 +223,15 @@ Lean really does not care what whitespacing you use, as long as you use at least
 
 ### End of definitions, lines, etc. ###
 
-text
+whitespace, **doesn't matter what kind** (see above)
 
-whitespace, doesn't matter what kind (see above)
+keywords like `def` mark the start of a new "line"
 
-keywords
+keywords like `end` mark the end of a "line"
 
 lean might be expecting another argument to a function--remember, the type of whitespacing doesn't matter to Lean
 
-so some keywords might be unexpected and make Lean go WHAT ARE YOU DOING THIS ISN'T AN ARGUMENT
+so some keywords might be unexpected and make Lean go WHAT ARE YOU DOING THIS ISN'T AN ARGUMENT (e.g. if you called a 2-argument function but only gave one argument, even if you put a bunch of blank lines and then a `def`, Lean will not like that you put `def` instead of the second argument that you never gave)
 
 if in doubt just put #check 0 after a red squiggly to see if your later problems are fixed
 
